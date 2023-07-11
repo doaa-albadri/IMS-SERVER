@@ -7,6 +7,26 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
+const stats = [
+  { stat: 245, title: "Products" },
+  { stat: 122, title: "Orders" },
+  { stat: 10, title: "Suppliers" },
+];
+
+const orders = [
+  { stat: 83, title: "Delivered" },
+  { stat: 50, title: "Pending" },
+  { stat: 11, title: "Cancelled" },
+];
+
+const profits = {
+  labels: ["2006'", "2007", "2008", "2009", "2010", "2011", "2012"],
+  datasets: [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: "Convenience Goods" },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: "Impulse Goods" },
+  ],
+};
+
 const products = [
   {
     id: 1,
@@ -73,6 +93,103 @@ const suppliers = [
   },
 ];
 
+const salesStats = [
+  { stat: "75%", title: "Performance" },
+  { stat: "$25,000", title: "Cost" },
+  { stat: "$32,000", title: "Revenue" },
+];
+
+const revenue = {
+  labels: ["1'", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+  datasets: [
+    {
+      data: [65, 59, 80, 81, 56, 55, 40, 90, 99, 100, 65, 89],
+      label: "Goal",
+    },
+    {
+      data: [28, 48, 40, 19, 86, 27, 90, 88, 31, 65, 77, 80],
+      label: "Achieved",
+    },
+  ],
+};
+
+const salesTypes = {
+  labels: ["Download Sales", "In-Store Sales", "Mail-Order Sales"],
+  datasets: [
+    { data: [350, 450, 100] },
+    { data: [50, 150, 120] },
+    { data: [250, 130, 70] },
+  ],
+};
+
+const cupons = [
+  { title: "10% Cupon", stat: 25 },
+  { title: "15% Cupon", stat: 28 },
+  { title: "25% Cupon", stat: 62 },
+];
+
+const monthlyOrders = {
+  labels: ["1'", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+  datasets: [
+    {
+      data: [65, 59, 80, 81, 56, 55, 40, 90, 99, 100, 65, 89],
+      label: "Goal",
+    },
+    {
+      data: [28, 48, 40, 19, 86, 27, 90, 88, 31, 65, 77, 80],
+      label: "Achieved",
+    },
+  ],
+};
+
+const customerStats = [
+  {
+    title: "Customer Satisfaction",
+    stat: "100%",
+  },
+  { title: "Number of Orders", stat: 1000 },
+  { title: "Commission", stat: 500 },
+  { title: "Returned Customers", stat: 50 },
+];
+
+const inventoryStats = [
+  {
+    title: "Available",
+    stat: 1614,
+  },
+  { title: "Reserved", stat: 380 },
+  { title: "Sell Rate", stat: "94.67%" },
+  { title: "Return Rate", stat: "1.10%" },
+  { title: "Out-of-stock", stat: "10K" },
+];
+
+const purchases = [
+  {
+    vendor: "first vendor",
+    category: "first cat",
+    product: "first product",
+    qnty: 10,
+    productRate: 33,
+    sellRate: 44,
+  },
+  {
+    vendor: "second vendor",
+    category: "second cat",
+    product: "second product",
+    qnty: 10,
+    productRate: 33,
+    sellRate: 44,
+  },
+  {
+    vendor: "third vendor",
+    category: "third cat",
+    product: "third product",
+    qnty: 10,
+    productRate: 33,
+    sellRate: 44,
+  },
+];
+
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -84,29 +201,15 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/stats", (req, res) => {
-  res.json([
-    { stat: 245, title: "Products" },
-    { stat: 122, title: "Orders" },
-    { stat: 10, title: "Suppliers" },
-  ]);
+  res.json(stats);
 });
 
 app.get("/orders", (req, res) => {
-  res.json([
-    { stat: 83, title: "Delivered" },
-    { stat: 50, title: "Pending" },
-    { stat: 11, title: "Cancelled" },
-  ]);
+  res.json(orders);
 });
 
 app.get("/profits", (req, res) => {
-  res.json({
-    labels: ["2006'", "2007", "2008", "2009", "2010", "2011", "2012"],
-    datasets: [
-      { data: [65, 59, 80, 81, 56, 55, 40], label: "Convenience Goods" },
-      { data: [28, 48, 40, 19, 86, 27, 90], label: "Impulse Goods" },
-    ],
-  });
+  res.json(profits);
 });
 
 app.get("/products", (req, res) => {
@@ -194,116 +297,35 @@ app.post("/suppliers", (req, res) => {
 });
 
 app.get("/sales-stats", (req, res) => {
-  res.json([
-    { stat: "75%", title: "Performance" },
-    { stat: "$25,000", title: "Cost" },
-    { stat: "$32,000", title: "Revenue" },
-  ]);
+  res.json(salesStats);
 });
 
 app.get("/revenue", (req, res) => {
-  res.json({
-    labels: ["1'", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-    datasets: [
-      {
-        data: [65, 59, 80, 81, 56, 55, 40, 90, 99, 100, 65, 89],
-        label: "Goal",
-      },
-      {
-        data: [28, 48, 40, 19, 86, 27, 90, 88, 31, 65, 77, 80],
-        label: "Achieved",
-      },
-    ],
-  });
+  res.json(revenue);
 });
 
 app.get("/sales-types", (req, res) => {
-  res.json({
-    labels: ["Download Sales", "In-Store Sales", "Mail-Order Sales"],
-    datasets: [
-      { data: [350, 450, 100] },
-      { data: [50, 150, 120] },
-      { data: [250, 130, 70] },
-    ],
-  });
+  res.json(salesTypes);
 });
 
 app.get("/cupons", (req, res) => {
-  res.json([
-    { title: "10% Cupon", stat: 25 },
-    { title: "15% Cupon", stat: 28 },
-    { title: "25% Cupon", stat: 62 },
-  ]);
+  res.json(cupons);
 });
 
 app.get("/monthly-orders", (req, res) => {
-  res.json({
-    labels: ["1'", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-    datasets: [
-      {
-        data: [65, 59, 80, 81, 56, 55, 40, 90, 99, 100, 65, 89],
-        label: "Goal",
-      },
-      {
-        data: [28, 48, 40, 19, 86, 27, 90, 88, 31, 65, 77, 80],
-        label: "Achieved",
-      },
-    ],
-  });
+  res.json(monthlyOrders);
 });
 
 app.get("/customer-stats", (req, res) => {
-  res.json([
-    {
-      title: "Customer Satisfaction",
-      stat: "100%",
-    },
-    { title: "Number of Orders", stat: 1000 },
-    { title: "Commission", stat: 500 },
-    { title: "Returned Customers", stat: 50 },
-  ]);
+  res.json(customerStats);
 });
 
 app.get("/inventory-stats", (req, res) => {
-  res.json([
-    {
-      title: "Available",
-      stat: 1614,
-    },
-    { title: "Reserved", stat: 380 },
-    { title: "Sell Rate", stat: "94.67%" },
-    { title: "Return Rate", stat: "1.10%" },
-    { title: "Out-of-stock", stat: "10K" },
-  ]);
+  res.json(inventoryStats);
 });
 
 app.get("/purchases", (req, res) => {
-  res.json([
-    {
-      vendor: "first vendor",
-      category: "first cat",
-      product: "first product",
-      qnty: 10,
-      productRate: 33,
-      sellRate: 44,
-    },
-    {
-      vendor: "second vendor",
-      category: "second cat",
-      product: "second product",
-      qnty: 10,
-      productRate: 33,
-      sellRate: 44,
-    },
-    {
-      vendor: "third vendor",
-      category: "third cat",
-      product: "third product",
-      qnty: 10,
-      productRate: 33,
-      sellRate: 44,
-    },
-  ]);
+  res.json(purchases);
 });
 
 app.listen(5000, () => console.log("server started on port 5000"));
